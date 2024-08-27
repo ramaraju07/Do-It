@@ -13,10 +13,6 @@ const TaskList = () => {
     setSelectedTask(task);
   };
 
-  const handleCloseDetails = () => {
-    setSelectedTask(null);
-  };
-
   const handleCheckboxClick = (taskId) => {
     const taskToUpdate = tasks.find(task => task.id === taskId) || completedTasks.find(task => task.id === taskId);
 
@@ -65,7 +61,7 @@ const TaskList = () => {
   };
 
   return (
-    <div className="task-list">
+    <div className="task-list-container">
       <div className="task-input">
         <input
           type="text"
@@ -76,35 +72,44 @@ const TaskList = () => {
         <button onClick={handleAddTask}>Add Task</button>
       </div>
 
-      <div className="tasks">
-        <h3>Tasks</h3>
-        {tasks.length === 0 ? <p>No tasks available.</p> : (
-          tasks.map(task => (
-            <TaskItem
-              key={task.id}
-              task={task}
-              onCheckboxClick={() => handleCheckboxClick(task.id)}
-              onStarClick={() => handleStarClick(task.id)}
-            />
-          ))
-        )}
+      <div className="tasks-section">
+        <div className="tasks">
+          <h3>Tasks</h3>
+          {tasks.length === 0 ?  <p>No tasks available.</p> : (
+            tasks.map(task => (
+              <TaskItem
+                key={task.id}
+                task={task}
+                onCheckboxClick={() => handleCheckboxClick(task.id)}
+                onStarClick={() => handleStarClick(task.id)}
+                onClick={() => handleTaskClick(task)}  // Handle task click
+              />
+            ))
+          )}
+        </div>
+
+        <h3>Completed</h3>
+        <div className="completed-tasks">
+          {completedTasks.length === 0 ? <p>No completed tasks.</p> : (
+            completedTasks.map(task => (
+              <TaskItem
+                key={task.id}
+                task={task}
+                onCheckboxClick={() => handleCheckboxClick(task.id)}
+                onStarClick={() => handleStarClick(task.id)}
+                onClick={() => handleTaskClick(task)}  // Handle task click
+              />
+            ))
+          )}
+        </div>
       </div>
 
-      <h3>Completed</h3>
-      <div className="completed-tasks">
-        {completedTasks.length === 0 ? <p>No completed tasks.</p> : (
-          completedTasks.map(task => (
-            <TaskItem
-              key={task.id}
-              task={task}
-              onCheckboxClick={() => handleCheckboxClick(task.id)}
-              onStarClick={() => handleStarClick(task.id)}
-            />
-          ))
-        )}
-      </div>
-
-      {selectedTask && <TaskDetails task={selectedTask} onClose={handleCloseDetails} />}
+      {/* Display task details on the right */}
+      {selectedTask && (
+        <div className="task-details-container">
+          <TaskDetails task={selectedTask} />
+        </div>
+      )}
     </div>
   );
 };

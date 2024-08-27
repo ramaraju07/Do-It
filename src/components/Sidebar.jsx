@@ -4,32 +4,21 @@ import './Sidebar.css';
 const Sidebar = () => {
   return (
     <div className="sidebar">
-      <div className="user-info">
-        <img src="user-avatar.png" alt="User Avatar" />
-        <p>Hey, ABCD</p>
+      <div className="profile">
+        <img src="/path-to-profile-image.jpg" alt="Profile" />
+        <h2>Hey, ABCD</h2>
       </div>
-      <div className="side">
-      <nav>
-        <ul>
-          <li>All Tasks</li>
-          <li>Today</li>
-          <li>Important</li>
-          <li>Planned</li>
-          <li>Assigned to me</li>
-          </ul></nav></div>
-          <div className="side">
-            <nav><ul>
-          <li>Add list</li>
-        </ul>
-        </nav>
-        </div>
-        <div className="sidei">
+      <ul>
+        <li>All Tasks</li>
+        <li>Today</li>
+        <li>Important</li>
+        <li>Planned</li>
+        <li>Assigned to me</li>
+        <li className="add-list">+ Add list</li>
+      </ul>
+      <div className="today-tasks">
         <h3>Today Tasks</h3>
-        <span>11</span>
-        <hr/>
-        <div className="task-stats">
-          <div className="task-chart"></div>
-        </div>
+        <div className="task-count">11</div>
       </div>
     </div>
   );

@@ -1,17 +1,65 @@
+/* src/components/TaskItem.css */
 .task-item {
-  background-color: #fff;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-.task-item.completed {
-  text-decoration: line-through;
+.task-item.card-view {
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.star {
+.task-item.card-view .task-info {
+  width: 100%;
+}
+
+.task-item.card-view .star {
+  align-self: flex-end;
+}
+
+.task-item:last-child {
+  border-bottom: none;
+}
+
+.task-item .checkbox {
+  margin-right: 10px;
+}
+
+.task-item .task-name {
+  flex: 1;
+}
+
+.task-item .star {
+  cursor: pointer;
   color: gold;
+}
+
+.task-item .star.unimportant {
+  color: #ddd;
+}
+
+.app-container.dark-mode .task-item {
+  border-bottom: 1px solid #555;
+}
+
+.app-container.dark-mode .task-item .task-name {
+  color: #e0e0e0;
+}
+
+.app-container.dark-mode .task-item .star.unimportant {
+  color: #aaa;
+}
+.task-item {
+  padding: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.task-item:hover {
+  background-color: #f0f0f0;
 }

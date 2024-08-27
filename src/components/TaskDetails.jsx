@@ -1,43 +1,39 @@
-import React, { useState } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import React from 'react';
 import './TaskDetails.css';
+import { FaPlusCircle, FaBell, FaCalendar, FaRedo, FaStar, FaTimes, FaTrash } from 'react-icons/fa';
 
-const TaskDetails = ({ task, onClose }) => {
-  const [showDatePicker, setShowDatePicker] = useState(false);
-  const [dueDate, setDueDate] = useState(null);
+const TaskDetails = ({ task, onClose, onDelete }) => {
+  if (!task) {
+    return <div className="task-details-empty">No Task Selected</div>;
+  }
 
-  const handleDateChange = (date) => {
-    setDueDate(date);
-    setShowDatePicker(false);
+  const handleStarClick = () => {
+    // Functionality for toggling importance goes here
+    alert('Toggle importance');
   };
 
   return (
     <div className="task-details">
       <div className="task-details-header">
-        <input type="checkbox" checked={task.completed} />
-        <span>{task.name}</span>
-        <button className="close-btn" onClick={onClose}>✕</button>
+        <h3>{task.title}</h3>
+        <div className="task-details-actions">
+          <span className="star" onClick={handleStarClick}>
+            {task.important ? '★' : '☆'}
+          </span>
+          <FaTimes className="close-icon" onClick={onClose} />
+        </div>
       </div>
-      <div className="task-details-body">
-        <button>Add Step</button>
-        <button>Set Reminder</button>
-        <button onClick={() => setShowDatePicker(!showDatePicker)}>
-          Add Due Date
-        </button>
-        {showDatePicker && (
-          <DatePicker
-            selected={dueDate}
-            onChange={handleDateChange}
-            inline
-          />
-        )}
-        <button>Repeat</button>
+      <ul className="task-details-options">
+        <li><FaPlusCircle className="icon" /> Add Step</li>
+        <li><FaBell className="icon" /> Set Reminder</li>
+        <li><FaCalendar className="icon" /> Add Due Date</li>
+        <li><FaRedo className="icon" /> Repeat</li>
+      </ul>
+      <div className="task-details-notes">
         <textarea placeholder="Add Notes"></textarea>
       </div>
       <div className="task-details-footer">
-        <span>Created Today</span>
-        <button className="delete-btn">🗑</button>
+        <FaTrash className="delete-icon" onClick={onDelete} />
       </div>
     </div>
   );
